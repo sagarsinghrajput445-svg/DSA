@@ -31,7 +31,7 @@ public:
         while(temp->next!=NULL){
             temp=temp->next;
         }
-        ListNode* ans=reverse(newHead);
+        reverse(newHead);
         ListNode* a=head;
         ListNode* b=temp;
         ListNode* c=new ListNode(10);
@@ -46,7 +46,6 @@ public:
            b=b->next;
            }
         }
-        head=c->next;
        }
     }
 };
