@@ -17,6 +17,9 @@ public:
         ListNode* a = head;
         ListNode* b = head->next;
         ListNode* c = head->next->next;
+         int mind = INT_MAX;
+        int f = -1;
+        int s = -1;
         if (c == NULL)
             return {-1, -1};
         while (c) {
@@ -26,6 +29,12 @@ public:
                     fidx = idx;
                 else
                     sidx = idx;
+                f = s;
+                s = idx;
+                if (f != -1) {
+                    int d = s - f;
+                    mind = min(mind, d);
+                }
             }
             a = a->next;
             b = b->next;
@@ -35,28 +44,6 @@ public:
         if (sidx == -1)
             return {-1, -1};
         int maxd = sidx - fidx;
-        int mind = INT_MAX;
-        fidx = -1;
-        sidx = -1;
-        idx = 1;
-        a = head;
-        b = head->next;
-        c = head->next->next;
-        while (c) {
-            if (a->val > b->val && c->val > b->val ||
-                a->val < b->val && c->val < b->val) {
-                fidx = sidx;
-                sidx = idx;
-                if (fidx != -1) {
-                    int d = sidx - fidx;
-                    mind = min(mind, d);
-                }
-            }
-            a = a->next;
-            b = b->next;
-            c = c->next;
-            idx++;
-        }
         return {mind, maxd};
     }
 };
