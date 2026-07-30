@@ -14,7 +14,7 @@ public:
         ListNode* temp = head->next;
         while (temp) {
             ListNode* j = head;
-            while (j) {
+            while (j!=temp) {
                 if (j->val > temp->val)
                     swap(j->val, temp->val);
 
