@@ -2,10 +2,7 @@ class Solution {
 public:
     string helper(string str, int k, string ans){
         int n=str.length();
-        if(n==1){
-            ans+=str;
-            return ans;
-        }
+        if(n==0) return ans;
         int fact=1;
         for(int i=2;i<=n-1;i++){
             fact*=i;
