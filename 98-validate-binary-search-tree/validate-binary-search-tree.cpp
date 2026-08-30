@@ -1,23 +1,17 @@
 class Solution {
 public:
-    long long maximum(TreeNode* root) {
-        if (root == NULL)
-            return LLONG_MIN;
-        long long lmax = maximum(root->left);
-        long long rmax = maximum(root->right);
-        return max((long long)(root->val), max(lmax, rmax));
-    }
-    long long minimum(TreeNode* root) {
-        if (root == NULL)
-            return LLONG_MAX;
-        long long leftans = minimum(root->left);
-        long long rightans = minimum(root->right);
-        return min((long long)(root->val), min(leftans, rightans));
+     void helper(TreeNode* root, vector<int>& ans){
+        if(root==NULL) return;
+        helper(root->left,ans);
+        ans.push_back(root->val);
+        helper(root->right,ans);
     }
     bool isValidBST(TreeNode* root) {
-        if(root==NULL) return true;
-        if (((long long)(root->val) <= maximum(root->left)) || (root->val >= minimum(root->right)))
-            return false;
-        return isValidBST(root->left) && isValidBST(root->right);
+        vector<int>ans;
+        helper(root,ans);
+        for(int i=1;i<ans.size();i++){
+            if(ans[i]<=ans[i-1]) return false;
+        }
+        return true;
     }
 };
