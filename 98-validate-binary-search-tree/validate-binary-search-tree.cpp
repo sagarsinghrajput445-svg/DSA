@@ -1,17 +1,22 @@
 class Solution {
 public:
-     void helper(TreeNode* root, vector<int>& ans){
-        if(root==NULL) return;
-        helper(root->left,ans);
-        ans.push_back(root->val);
-        helper(root->right,ans);
+    void helper(TreeNode* root,TreeNode* &prev,bool &flag) {
+        if (root == NULL)
+            return;
+        helper(root->left,prev,flag);
+        if (prev != NULL) {
+            if (root->val <= prev->val) {
+                flag = false;
+                return;
+            }
+        }
+        prev = root;
+        helper(root->right,prev,flag);
     }
     bool isValidBST(TreeNode* root) {
-        vector<int>ans;
-        helper(root,ans);
-        for(int i=1;i<ans.size();i++){
-            if(ans[i]<=ans[i-1]) return false;
-        }
-        return true;
+        TreeNode* prev = NULL;
+        bool flag = true;
+        helper(root,prev,flag);
+        return flag;
     }
 };
