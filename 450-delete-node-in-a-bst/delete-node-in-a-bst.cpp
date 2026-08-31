@@ -28,9 +28,9 @@ public:
             if(root->left!=NULL && root->right!=NULL){
                 // replace the root with its inorder pred/succes
                 // after replacing delete the pred/succes
-                TreeNode* pred=iop(root);
-                root->val=pred->val;
-                root->left=deleteNode(root->left,pred->val);
+                TreeNode* succ=ios(root);
+                root->val=succ->val;
+                root->right=deleteNode(root->right,succ->val);
             }
         }
         else if(root->val > key){// go left
