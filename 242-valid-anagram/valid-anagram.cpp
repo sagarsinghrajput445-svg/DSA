@@ -16,6 +16,7 @@ public:
             }
             else return false;
         }
+        if(map1.size()>0) return false;
         return true;
     }
 };
