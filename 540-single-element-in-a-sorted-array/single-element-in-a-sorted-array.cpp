@@ -1,26 +1,30 @@
 class Solution {
 public:
-    int singleNonDuplicate(vector<int>& nums) {
-        int n=nums.size();
-        if(n==1) return nums[0];
-        int lo=0;
-        int hi=n-1;
-        while(lo<=hi){
-            if(lo==0){
-                if(nums[lo]!=nums[lo+1]) return nums[lo];
-            }
-            if(hi==n-1){
-                if(nums[hi]!=nums[hi-1]) return nums[hi];
-            }
-            if(lo<hi && nums[lo]==nums[lo+1]) lo++;
-            if(lo<hi && nums[hi]==nums[hi-1]) hi--;
-            if(nums[lo]!=nums[lo+1] && nums[lo]!=nums[lo-1]) return nums[lo];
-            if(nums[hi]!=nums[hi+1] && nums[hi]!=nums[hi-1]) return nums[hi];
-            else{
-                lo++;
-                hi--;
+    int singleNonDuplicate(vector<int>& arr) {
+        int n = arr.size();
+        if (n == 1)
+            return arr[0];
+        int lo = 0, hi = n - 1;
+        while (lo <= hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (mid == 0 && arr[mid] != arr[mid + 1])
+                return arr[mid];
+            if (mid == n - 1 && arr[mid] != arr[mid - 1])
+                return arr[mid];
+            if (arr[mid] != arr[mid - 1] && arr[mid] != arr[mid + 1])
+                return arr[mid];
+            if (mid % 2 == 0) {
+                if (arr[mid - 1] == arr[mid]) {
+                    hi = mid - 1;
+                } else
+                    lo = mid + 1;
+            } else {
+                if (arr[mid - 1] == arr[mid]) {
+                    lo = mid + 1;
+                } else
+                    hi = mid - 1;
             }
         }
-       return -1; 
+        return -1;
     }
 };
