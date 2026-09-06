@@ -8,9 +8,9 @@ public:
         }
         unordered_set<int>s;
         for(auto p: m){
+            if(s.find(p.second)!=s.end()) return false;
             s.insert(p.second);
         }
-        if(s.size()==m.size()) return true;
-        else return false;
+        return true;
     }
 };
